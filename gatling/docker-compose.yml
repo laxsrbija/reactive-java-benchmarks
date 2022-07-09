@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  gatling:
+    build: .
+    environment:
+      - SERVER_HOST=http://host.docker.internal:8080/
+      - ENDPOINTS=text,text/50
+    volumes:
+      - /tmp:/opt/gatling/results/
