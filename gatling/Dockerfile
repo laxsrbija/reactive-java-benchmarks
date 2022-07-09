@@ -13,4 +13,4 @@ RUN apt update && apt install unzip -y \
 COPY simulations/ /opt/gatling/user-files/simulations/
 COPY run.sh /opt/
 
-CMD ["sh", "-c", "/opt/run.sh ${SERVER_HOST} ${ENDPOINTS}"]
+CMD ["sh", "-c", "/opt/run.sh ${HOSTS} ${ENDPOINTS}"]

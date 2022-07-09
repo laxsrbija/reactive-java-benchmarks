@@ -18,8 +18,8 @@ public class LoadSimulation extends Simulation {
 
   final ScenarioBuilder scn =
       scenario("Load tests")
-        .forever().on(
-          exec(http("Test")
+        .forever()
+        .on(exec(http("Test")
             .get(endpoint)));
 
   {

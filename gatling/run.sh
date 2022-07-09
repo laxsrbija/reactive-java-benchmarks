@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 
-SERVER_HOST=$1
+HOSTS=$1
 ENDPOINTS=$2
 
-echo "Starting the stress test on ${SERVER_HOST}"
+for host in $(echo "${HOSTS}" | tr "," "\n"); do
+  for endpoint in $(echo "${ENDPOINTS}" | tr "," "\n"); do
+    DESCRIPTION="Benchmark for endpoint '${endpoint}' on ${host}"
+    echo "$DESCRIPTION"
 
-for endpoint in $(echo ${ENDPOINTS} | tr "," "\n"); do
-  echo "Testing endpoint ${endpoint}"
-  JAVA_OPTS="-DbaseUrl=${SERVER_HOST} -Dendpoint=${endpoint}" \
-    "$GATLING_HOME/bin/gatling.sh" --run-description "Benchmark for endpoint ${endpoint}" -s LoadSimulation
+    JAVA_OPTS="-DbaseUrl=${host} -Dendpoint=${endpoint}" \
+      "$GATLING_HOME/bin/gatling.sh" --run-description "${DESCRIPTION}" -s LoadSimulation
+
+    echo "Round finished, sleeping for 15 sec"
+    sleep 15s
+  done
 done
