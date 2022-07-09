@@ -2,6 +2,7 @@ package io.github.laxsrbija.benchmarks.webmvc;
 
 import java.util.concurrent.locks.LockSupport;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -12,9 +13,9 @@ public class BenchmarkRestController {
     return "Hello world!";
   }
 
-  @GetMapping("text-with-delay")
-  public String textWithDelay() {
-    LockSupport.parkNanos(50_000_000);
+  @GetMapping("text/{delay}")
+  public String textWithDelay(@PathVariable("delay") long delay) {
+    LockSupport.parkNanos(delay * 1_000_000);
     return "Hello world!";
   }
 }

@@ -2,6 +2,7 @@ package io.github.laxsrbija.benchmarks.webflux;
 
 import java.time.Duration;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
@@ -13,9 +14,9 @@ public class BenchmarkRestController {
     return "Hello world!";
   }
 
-  @GetMapping("text-with-delay")
-  public Mono<String> textWithDelay() {
+  @GetMapping("text/{delay}")
+  public Mono<String> textWithDelay(@PathVariable("delay") long delay) {
     return Mono.just("Hello world!")
-        .delayElement(Duration.ofMillis(50));
+        .delayElement(Duration.ofMillis(delay));
   }
 }
