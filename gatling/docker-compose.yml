@@ -3,7 +3,7 @@ services:
   gatling:
     build: .
     environment:
-      - HOSTS=http://host.docker.internal:8080/,http://host.docker.internal:8081/
-      - ENDPOINTS=text,text/50
+      - HOSTS=${WEBMVC_HOST},${WEBFLUX_HOST}
+      - ENDPOINTS=text,text/50,remote/20?server=${REMOTE_WEBMVC_HOST}text/30,remote/20?server=${REMOTE_WEBFLUX_HOST}text/30
     volumes:
       - /tmp:/opt/gatling/results/
