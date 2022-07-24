@@ -25,7 +25,7 @@ public class LoadSimulation extends Simulation {
   {
     setUp(
       scn.injectClosed(
-        incrementConcurrentUsers(256)
+        incrementConcurrentUsers(128)
           .times(32)
           .eachLevelLasting(20)
           .separatedByRampsLasting(10)
